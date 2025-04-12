@@ -104,7 +104,7 @@ The results can be:
 - **Saved:** A structured dictionary can be generated and optionally saved for further analysis.
 
 Example graph visualization:
-![Alt text](Results\cnn_0-14.png)
+![Alt text](Results/cnn_0-14.png)
 
 Example output dictionary:
 ```python
