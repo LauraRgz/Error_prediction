@@ -70,6 +70,79 @@ Each model in this repository is implemented in its own Jupyter notebook (e.g., 
 6. **Visualize Results**  
    Notebooks include plots comparing actual vs. predicted values for easier interpretation.
 
+#### Example: CNN Model
+
+##### Main Steps:
+- Load and preprocess the 2Q gate error rate time series.
+- Prepare sequences of historical calibration data.
+- Use a 1D CNN model defined in a utility function to train and forecast.
+- Evaluate using RMSE.
+- Plot predicted vs. actual error rates for visual comparison.
+
+##### Sample Code
+
+```python
+# Run the CNN model for qubit pair '0-14'
+
+cnn_estimator_past(
+    data=df,                 # DataFrame with calibration data
+    N_remove=30,             # Number of days to remove from data
+    N_estimate=30,           # Number of days to estimate
+    link='0-14',             # Target qubit pair
+    normalize_data=True,
+    epochs=100,
+    save_figures=False,
+    save_path=None,
+    show_figs=True
+)
+```
+
+The results can be:
+
+- **Visualized:** Comparison plots of predicted vs. actual error rates can be shown in the notebook.
+
+- **Saved:** A structured dictionary can be generated and optionally saved for further analysis.
+
+Example graph visualization:
+![Alt text](Results\cnn_0-14.png)
+
+Example output dictionary:
+```python
+result = {
+    "0-14": {
+        "Normalized_data": ...,
+        "Complete_dates": [...],
+        "Complete_estimated_data": [...],
+
+        "Past_dates": [...],
+        "Last_date": ...,
+        "Past_data": [...],
+
+        "Future_dates": [...],
+        "Future_estimated_data": [...],
+
+        "Train_dates": [...],
+        "Last_train_date": ...,
+        "Train_data": [...],
+        "Train_estimated_data": [...],
+
+        "Train_estimation_error": [...],
+        "Train_mean_estimation_error": ...,
+        "Train_std_estimation_error": ...,
+        "Train_rmse_estimation_error": ...,
+
+        "Test_dates": [...],
+        "Test_data": [...],
+        "Test_estimated_data": [...],
+
+        "Test_estimation_error": [...],
+        "Test_mean_estimation_error": ...,
+        "Test_std_estimation_error": ...,
+        "Test_rmse_estimation_error": ...
+    }
+}
+```
+
 ### Unified Notebook
 
 In addition to individual model notebooks, we provide a single Jupyter notebook that contains **all five models**: `estimator.ipynb`.
